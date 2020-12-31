@@ -1,0 +1,27 @@
+swagger: "2.0"
+info:
+  description: '<font size="2" color="red">MIT Licença</font>'
+  version: "1.0.3"
+  title: "Web Scraping Api"
+  license:
+    name: "Erlan Lucio"
+    url: "https://github.com/lucioerlan"
+host: "localhost:5000"
+basePath: "/api"
+schemes:
+  - "http"
+paths:
+  /jobs/:
+    get:
+      tags:
+        - "SCRAPING JOBS"
+      summary: "Scraping Data on the website vasgas.com"
+      description: "Get Jobs."
+      operationId: "getjob"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
