@@ -58,7 +58,7 @@ $ npm install
 ```
 $ cp .env-examples .env 
 ```
-* **Then configure with your connection to mongoDB**
+* Then configure with your connection to MongoDB
 
 <br>
 
