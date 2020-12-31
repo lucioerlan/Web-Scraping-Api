@@ -25,7 +25,6 @@
 </p>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## 🤔 About The Project
 
@@ -46,6 +45,20 @@ git clone https://github.com/lucioerlan/Web-Scraping-Api.git
 $ cd Web-Scraping-Api
 $ npm install
 ```
+
+<br>
+
+
+<!-- SETUP -->
+
+## 🔥 Setup
+
+#### Copy or rename the file
+
+```
+$ cp .env-examples .env 
+```
+* **Then configure with your connection to mongoDB**
 
 <br>
 
