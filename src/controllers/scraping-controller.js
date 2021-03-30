@@ -1,36 +1,51 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
-const Jobs = require('../models/scraping-models');
-const WebConfig = require('../utils/webConfig');
+const { load } = require('cheerio');
 const { logger } = require('../middlewares');
+const { cleanupText, Util, WebConfig } = require('../utils');
+const Jobs = require('../models/scraping-models');
+
+const util = new Util();
 
 /**
  * The Jobs API.
  *
- * @method show Checks if the data already exists in mongoDB
- * @method store Scraps data and saves it to mongoDB
+ * @method show returns the data
+ * @method prepare cycle through HTML elements
+ * @method store insert the elements
+ * @method delete delete the collection
  * @return Jobs Return Json With
  */
 
+
 class scrapingController {
+  constructor() {
+    this.show = this.show.bind(this);
+  }
+  
   async show(req, res) {
     try {
+      const data = await Jobs.find();
 
-      Jobs.find({}, { __v: 0 }, async (err, results) => {
-        if (!err && results.length) {
+      if (data.length) {
+        util.setSuccess(200, data, this.delete() );
+      }
+      
+      if (!data.length) this.prepare();
 
-          Jobs.deleteMany((error) => {
-            if (error) throw error;
-          });
+      return util.send(res);
+    } catch (err) {
+      logger.error(err);
+    }
+  }
 
-          res.status(200).json({
-            data: results,
-            count: results.length,
-          });
 
-        } else {
-          scrapingController.store();
-        }
+  async prepare() {
+    try {
+      const { data } = await axios.get(WebConfig.urlSite);
+      const $ = load(data);
+
+      $(WebConfig.todasVagas).each((i, Elems) => {
+        this.store(Elems, $);
       });
 
     } catch (err) {
@@ -38,49 +53,34 @@ class scrapingController {
     }
   }
 
-  
-  static async store() {
+
+  async store(Elems, $) {
+    const jobs = [];
+
+    jobs.push({
+      name: cleanupText($(Elems).find(WebConfig.dataPublicacao)),
+      link: `https://www.${$(Elems).find('a').attr('href')}`,
+      location: cleanupText($(Elems).find(WebConfig.vagaLocal)),
+      description: cleanupText($(Elems).find(WebConfig.detalhes)),
+      data_publication: cleanupText($(Elems).find(WebConfig.dataPublicacao)),
+    });
+
+    Jobs.insertMany(jobs);
+  }
+
+
+  async delete() {
     try {
-      const jobs = [];
-
-      const { data } = await axios.get(WebConfig.urlSite);
-
-      const $ = cheerio.load(data);
-
-      const Elems = $(WebConfig.todasVagas);
-
-      for (let i = 0; i < Elems.length; i += 1) {
-
-        const name = $(Elems[i]).find(WebConfig.cargo)
-        .text().trim().replace(/\n/g, '');
-
-        const link = `https://www.${$(Elems[i]).find('a').attr('href')}`;
-
-        const location = $(Elems[i]).find(WebConfig.vagaLocal)
-        .text().trim().replace(/\n/g, '');
-
-        const description = $(Elems[i]).find(WebConfig.detalhes)
-        .text().trim().replace(/\n/g, '');
-
-        const data_publication = $(Elems[i]).find(WebConfig.dataPublicacao)
-        .text().trim().replace(/\n/g, '');
-
-        jobs.push({
-          name,
-          link,
-          location,
-          description,
-          data_publication,
-        });
-      }
-
-      Jobs.insertMany(jobs); // Insert MongoDB
+      
+      await Jobs.deleteMany((error) => {
+        if (error) throw new Error('no delete!');
+      });
 
     } catch (err) {
       logger.error(err);
     }
-
   }
 }
+
 
 module.exports = scrapingController;
