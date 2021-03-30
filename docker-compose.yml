@@ -1,0 +1,44 @@
+version: "3"
+
+volumes:
+  node_data: {}
+
+networks:
+  node-net:
+    external: false
+
+services:
+  server:
+    image: node:12.10.0-alpine
+    container_name: nodejs
+    expose:
+      - 5000
+    environment:
+      - DATABASE_URL=mongodb://db:27017/scraping
+    networks:
+      - node-net
+    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5000:5000
+    volumes:
+      - "./:/home/app/"
+    depends_on:
+      - db
+    links:
+      - db
+    command: sh -c "cd /home/app && npm install --save && npm run start"
+
+  db:
+    image: mongo
+    container_name: mongodb
+    networks:
+      - node-net
+    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 27017:27017
