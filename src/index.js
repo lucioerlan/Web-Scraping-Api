@@ -6,7 +6,7 @@ const cors = require('cors');
 const compression = require('compression');
 const express = require('express');
 const ip = require('ip');
-const connectDB = require('./src/database/db-config');
+const connectDB = require('./database/db-config');
 require('dotenv').config();
 require('colors');
 
@@ -15,10 +15,10 @@ const {
   responseMiddleware,
   unauthorizedMiddleware,
   securityMiddleware,
-} = require('./src/middlewares');
+} = require('./middlewares');
 
-const ScrapingRoutes = require('./src/routes/scraping-routes');
-const SwaggerRoutes = require('./src/doc/swagger-config');
+const ScrapingRoutes = require('./routes/scraping-routes');
+const SwaggerRoutes = require('./doc/swagger-config');
 
 app.use(compression());
 app.use(cors());
