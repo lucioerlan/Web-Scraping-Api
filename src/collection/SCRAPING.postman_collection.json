@@ -1,72 +1,30 @@
 {
 	"info": {
-		"_postman_id": "2234c48e-17f5-4c0d-b33c-e005f7a89f5d",
-		"name": "JOBS",
+		"_postman_id": "5e702dad-e6ef-4503-b8ea-3e8569796eed",
+		"name": "Web-Scraping-Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "SHOW",
+			"name": "SCRAPING JOBS",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/jobs",
+					"raw": "http://localhost:5000/api/jobs/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"jobs"
+						"api",
+						"jobs",
+						""
 					]
-				},
-				"description": "GET JOBS"
-			},
-			"response": []
-		},
-		{
-			"name": "DOC",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/docs",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"docs"
-					]
-				},
-				"description": "Swagger doc, run browser "
+				}
 			},
 			"response": []
 		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "be14b24e-0409-4bbe-a524-406dcd4f7985",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "9b204e52-74e9-4c00-8fdd-49dc9e49c609",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
