@@ -13,7 +13,7 @@ paths:
   /jobs:
     get:
       tags:
-      - Routes
+      - ROUTES
       summary: SCRAPING JOBS
       operationId: SCRAPINGJOBS
       parameters: []
@@ -23,5 +23,5 @@ paths:
           headers: {}
       deprecated: false
 tags:
-- name: Routes
+- name: ROUTES
   description: ''
