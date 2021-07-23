@@ -9,7 +9,7 @@ networks:
 
 services:
   server:
-    image: node:12.10.0-alpine
+    image: node:12.22.3-alpine
     container_name: nodejs
     expose:
       - 5000
