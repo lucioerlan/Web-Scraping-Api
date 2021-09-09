@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Zip = require('../../src/modules/scraping/scraping-schema');
+const Jobs = require('../../src/schema/jobs-schema');
 
 const { URL } = require('../fixtures/mongo.test');
 
@@ -13,7 +13,7 @@ describe('Connection MongoDb', () => {
 
 describe('Delete Records', async () => {
   it('successful in deleting all records in Jobs', (done) => {
-    Zip.deleteMany((error) => {
+    Jobs.deleteMany((error) => {
       if (error) throw error;
     });
     done();

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { load } = require('cheerio');
 const { Cleaning, TagHtml } = require('../../utils');
-const Jobs = require('./scraping-schema');
+const Jobs = require('../../schema/jobs-schema');
 
 const getJobs = async () => {
   const data = await Jobs.find();

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Jobs = require('../../src/modules/scraping/scraping-schema');
+const Jobs = require('../../src/schema/jobs-schema');
 
 let job;
 
