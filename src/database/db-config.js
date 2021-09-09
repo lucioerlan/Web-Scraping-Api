@@ -10,7 +10,8 @@ const connectDB = async () => {
     useUnifiedTopology: true,
   });
   if (!mongoose.connection) logger.error('Error connecting Mongo DB');
-  else console.log('Mongo DB connected successfully');
+  else logger.info('Mongo DB connected successfully');
 };
+
 
 module.exports = connectDB;

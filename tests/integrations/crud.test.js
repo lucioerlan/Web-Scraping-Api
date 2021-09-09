@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Jobs = require('../../src/models/scraping-models');
+const Jobs = require('../../src/modules/scraping/scraping-schema');
 
 let job;
 
@@ -13,7 +13,6 @@ describe('Creating Job', () => {
   });
 });
 
-
 describe('Reading Job', () => {
   it('finds Jobs with the link of job', (done) => {
     Jobs.findOne({ link: 'testeurl' }).then(() => {
@@ -22,7 +21,6 @@ describe('Reading Job', () => {
     });
   });
 });
-
 
 describe('Update Job', () => {
   it('update a job', (done) => {
@@ -34,7 +32,6 @@ describe('Update Job', () => {
       });
   });
 });
-
 
 describe('Jobs Delet', async () => {
   it('successful in deleting all records', (done) => {
