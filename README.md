@@ -10,9 +10,8 @@
 <br />
 <p align="center">
   <h3 align="center"> 
-
+ 
    Web Scraping Api 🏀
-
   </h3> 
   <p align="center">
     <img src="https://user-images.githubusercontent.com/66112497/84624410-b361ca00-aeb7-11ea-9982-a16adc7cf871.png" alt="Logo" >
@@ -84,11 +83,11 @@ $ npm start
 #### Or Run Docker 🐳
 
 ```
-$ docker run -p 5000:5000 scraping/node-api
+$ docker network create node-net
 ```
 
 ```
-$ docker build -t scraping/node-api .
+$ docker-compose up
 ```
 
 <br>

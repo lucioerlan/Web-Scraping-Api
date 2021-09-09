@@ -1,11 +1,9 @@
-const { datetimeNow } = require('./current');
-const { cleanupText } = require('./cleanText');
-const WebConfig = require('./webConfig');
+const { Cleaning } = require('./Cleaning');
+const TagHtml = require('./Tags');
 const Util = require('./Utils');
 
 module.exports = {
-  datetimeNow,
-  cleanupText,
-  WebConfig,
+  Cleaning,
+  TagHtml,
   Util,
 };

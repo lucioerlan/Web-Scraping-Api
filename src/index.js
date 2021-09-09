@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Constants
 const PORT = process.env.PORT || 5000;
 
@@ -7,17 +9,16 @@ const compression = require('compression');
 const express = require('express');
 const ip = require('ip');
 const connectDB = require('./database/db-config');
-require('dotenv').config();
-require('colors');
 
 const app = express();
 const {
+  logger,
   responseMiddleware,
   unauthorizedMiddleware,
   securityMiddleware,
 } = require('./middlewares');
 
-const ScrapingRoutes = require('./routes/scraping-routes');
+const ScrapingRoutes = require('./modules/scraping/scraping-routes');
 const SwaggerRoutes = require('./doc/swagger-config');
 
 app.use(compression());
@@ -51,9 +52,8 @@ app.use((err, req, res) => {
 
 const startServer = async () => {
   app.listen(PORT, () => {
-    console.log(
-      `Server is running at port ${PORT}, see more about the application on: http://${ip.address()}:${PORT}/api/docs`
-        .bgMagenta
+    logger.info(
+      `${`Server is running at port ${PORT}, see more about the application on: http://${ip.address()}:${PORT}/api/docs`}`,
     );
   });
 };
