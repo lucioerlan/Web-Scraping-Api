@@ -15,7 +15,7 @@
       "cross-env CI=true npm run test --findRelatedTests"
     ]
   },
-  "scripts": {
+  "scripts": { 
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "mocha tests/**/*.test.js --timeout 30000 --exit",
