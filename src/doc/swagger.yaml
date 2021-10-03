@@ -7,8 +7,8 @@ info:
     url: https://github.com/lucioerlan
   version: '1.0'
 servers:
-  #prd=https://web-scraping-api.herokuapp.com/api
-- url: http://localhost:5000/api
+  #dev=http://localhost:5000/api
+- url: https://web-scraping-api.herokuapp.com/api
   variables: {}
 paths:
   /jobs:
